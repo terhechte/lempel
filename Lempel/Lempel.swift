@@ -16,7 +16,7 @@ struct LempelSettings {
     static let defaultWindowsBitsWithGZipHeader = 16 + LempelSettings.defaultWindowsBits
 }
 
-enum LempelError: ErrorType {
+public enum LempelError: ErrorType {
     case DataError(msg: String)
     case GzipError(msg: String)
     case SystemError(msg: String)
@@ -46,8 +46,8 @@ enum LempelError: ErrorType {
     }
 }
 
-extension NSData {
-    func decompressGzip(windowBits: Int32 = LempelSettings.defaultWindowsBitsWithGZipHeader) throws -> NSData {
+public extension NSData {
+    public func decompressGzip(windowBits: Int32 = LempelSettings.defaultWindowsBitsWithGZipHeader) throws -> NSData {
         guard self.length > 0
             else { return self }
         
