@@ -10,6 +10,9 @@
 		4D20CD1D1C2356770087DB4F /* Lempel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D20CD1C1C2356770087DB4F /* Lempel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D20CD241C2356770087DB4F /* Lempel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D20CD191C2356760087DB4F /* Lempel.framework */; };
 		4D20CD291C2356770087DB4F /* LempelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20CD281C2356770087DB4F /* LempelTests.swift */; };
+		4D20CD341C2356840087DB4F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D20CD331C2356840087DB4F /* libz.tbd */; };
+		4D20CD361C2356980087DB4F /* Lempel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D20CD351C2356980087DB4F /* Lempel.swift */; };
+		4D20CD3B1C24342E0087DB4F /* archive.txt.gz in Resources */ = {isa = PBXBuildFile; fileRef = 4D20CD3A1C24342E0087DB4F /* archive.txt.gz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,10 @@
 		4D20CD231C2356770087DB4F /* LempelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LempelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D20CD281C2356770087DB4F /* LempelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LempelTests.swift; sourceTree = "<group>"; };
 		4D20CD2A1C2356770087DB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D20CD331C2356840087DB4F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4D20CD351C2356980087DB4F /* Lempel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lempel.swift; sourceTree = "<group>"; };
+		4D20CD371C235FE00087DB4F /* test */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = test; sourceTree = "<group>"; };
+		4D20CD3A1C24342E0087DB4F /* archive.txt.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = archive.txt.gz; path = Fixtures/archive.txt.gz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D20CD341C2356840087DB4F /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,8 +79,11 @@
 		4D20CD1B1C2356770087DB4F /* Lempel */ = {
 			isa = PBXGroup;
 			children = (
+				4D20CD3C1C243A820087DB4F /* Libraries */,
 				4D20CD1C1C2356770087DB4F /* Lempel.h */,
 				4D20CD1E1C2356770087DB4F /* Info.plist */,
+				4D20CD351C2356980087DB4F /* Lempel.swift */,
+				4D20CD371C235FE00087DB4F /* test */,
 			);
 			path = Lempel;
 			sourceTree = "<group>";
@@ -80,10 +91,27 @@
 		4D20CD271C2356770087DB4F /* LempelTests */ = {
 			isa = PBXGroup;
 			children = (
+				4D20CD391C2434090087DB4F /* Fixtures */,
 				4D20CD281C2356770087DB4F /* LempelTests.swift */,
 				4D20CD2A1C2356770087DB4F /* Info.plist */,
 			);
 			path = LempelTests;
+			sourceTree = "<group>";
+		};
+		4D20CD391C2434090087DB4F /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				4D20CD3A1C24342E0087DB4F /* archive.txt.gz */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		4D20CD3C1C243A820087DB4F /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				4D20CD331C2356840087DB4F /* libz.tbd */,
+			);
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D20CD3B1C24342E0087DB4F /* archive.txt.gz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D20CD361C2356980087DB4F /* Lempel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +335,7 @@
 		4D20CD2E1C2356770087DB4F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -317,12 +348,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stylemac.Lempel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/zlib";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4D20CD2F1C2356770087DB4F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -335,6 +369,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stylemac.Lempel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/zlib";
 			};
 			name = Release;
 		};

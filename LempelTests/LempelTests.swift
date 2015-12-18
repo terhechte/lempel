@@ -11,19 +11,34 @@ import XCTest
 
 class LempelTests: XCTestCase {
     
+    var testData: NSData!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let bundle = NSBundle(forClass: self.classForCoder)
+        let file = bundle.URLForResource("archive", withExtension: "txt.gz")
+        self.testData = NSData(contentsOfURL: file!)!
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        do {
+            let newData = try self.testData.decompressGzip()
+            XCTAssertNotNil(newData)
+            let converted = String(data: newData, encoding: NSUTF8StringEncoding)
+            XCTAssertNotNil(converted)
+            let convertedString = (converted! as NSString)
+            XCTAssertNotNil(convertedString)
+            let checkString = NSString(string: "From austinzheng at gmail.com  Mon Dec 14 00:34:29 2015\nFrom: austinzhe")
+            XCTAssertEqual(checkString.substringToIndex(32), convertedString.substringToIndex(32))
+            
+        } catch let error {
+            print("error: \(error)")
+            XCTAssertTrue(false)
+        }
     }
     
     func testPerformanceExample() {
