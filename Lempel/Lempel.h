@@ -6,7 +6,13 @@
 //  Copyright © 2015 Benedikt Terhechte. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "TargetConditionals.h"
+
+#if TARGET_OS_IOS
+    #import <UIKit/UIKit.h>
+#else
+    #import <Cocoa/Cocoa.h>
+#endif
 
 //! Project version number for Lempel.
 FOUNDATION_EXPORT double LempelVersionNumber;
